@@ -9,16 +9,31 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String brand;
+    private int year;
+    private int price;
     private String model;
-    private String body;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
+
+    @ManyToOne
+    @JoinColumn(name = "color_id")
+    private Color color;
+
+    @ManyToOne
+    @JoinColumn(name = "body_id")
+    private Body body;
 
     public Car() {
     }
 
-    public Car(String brand, String model, String body) {
-        this.brand = brand;
+    public Car(int year, int price, String model, Brand brand, Color color, Body body) {
+        this.year = year;
+        this.price = price;
         this.model = model;
+        this.brand = brand;
+        this.color = color;
         this.body = body;
     }
 
@@ -30,12 +45,20 @@ public class Car {
         this.id = id;
     }
 
-    public String getBrand() {
-        return brand;
+    public int getYear() {
+        return year;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getModel() {
@@ -46,11 +69,27 @@ public class Car {
         this.model = model;
     }
 
-    public String getBody() {
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public Body getBody() {
         return body;
     }
 
-    public void setBody(String body) {
+    public void setBody(Body body) {
         this.body = body;
     }
 
@@ -69,15 +108,5 @@ public class Car {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Car{"
-                + "id=" + id
-                + ", brand='" + brand + '\''
-                + ", model='" + model + '\''
-                + ", body='" + body + '\''
-                + '}';
     }
 }

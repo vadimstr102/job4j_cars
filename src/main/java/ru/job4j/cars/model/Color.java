@@ -4,19 +4,12 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "photos")
-public class Photo {
+@Table(name = "colors")
+public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-
-    public Photo() {
-    }
-
-    public Photo(String name) {
-        this.name = name;
-    }
 
     public int getId() {
         return id;
@@ -42,8 +35,8 @@ public class Photo {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Photo photo = (Photo) o;
-        return id == photo.id;
+        Color color = (Color) o;
+        return id == color.id;
     }
 
     @Override

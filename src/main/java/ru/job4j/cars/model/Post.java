@@ -35,9 +35,13 @@ public class Post {
     public Post() {
     }
 
-    public Post(String description, Date created) {
+    public Post(String description, Date created, boolean isSold, User user, Car car, List<Photo> photos) {
         this.description = description;
         this.created = created;
+        this.isSold = isSold;
+        this.user = user;
+        this.car = car;
+        this.photos = photos;
     }
 
     public void addPhoto(Photo photo) {
@@ -68,12 +72,12 @@ public class Post {
         this.created = created;
     }
 
-    public boolean isSold() {
+    public boolean getIsSold() {
         return isSold;
     }
 
-    public void setSold(boolean sold) {
-        isSold = sold;
+    public void setIsSold(boolean isSold) {
+        this.isSold = isSold;
     }
 
     public User getUser() {
@@ -115,15 +119,5 @@ public class Post {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Post{"
-                + "id=" + id
-                + ", description='" + description + '\''
-                + ", created=" + created
-                + ", isSold=" + isSold
-                + '}';
     }
 }
