@@ -15,12 +15,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 public class PostServlet extends HttpServlet {
     @Override
@@ -47,9 +46,16 @@ public class PostServlet extends HttpServlet {
             int price = 0;
             String description = null;
             List<Photo> photos = new ArrayList<>();
-
             List<FileItem> items = upload.parseRequest(req);
-            File folder = new File("c:/images/job4j_cars/");
+            Properties cfg = new Properties();
+            try (
+                    InputStream inputStream = getClass().getClassLoader().getResourceAsStream("photo.properties")
+            ) {
+                cfg.load(inputStream);
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
+            File folder = new File(cfg.getProperty("photo.path"));
             if (!folder.exists()) {
                 folder.mkdir();
             }
